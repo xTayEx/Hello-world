@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+int binary(const int *t,int start,int end,int key,int n);
+
+int main()
+{
+	int st,en,mi,key,ret,i,n,*t;
+	
+	printf("请输入数组长度\n");
+	scanf("%d",&n);
+	t=malloc(n*sizeof(int)); 
+	printf("请输入数组元素的数值\n");
+	
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&t[i]);
+	}
+	printf("请输入要查找的元素\n");
+	scanf("%d",&key);
+	
+	ret=binary(t,st,en,key,n);
+	
+	if(ret==-1)
+	{
+		printf("查找失败！\n");
+	}
+	else
+	{
+		printf("该元素的下标是：%d\n",ret+1);
+	}
+
+	return 0;
+ }
+ 
+ int binary(const int *t,int start,int end,int key,int n)
+ {
+ 	start=0;end=n;
+ 	int ret=-1;
+ 	int mid;
+ 	
+	
+	while(start<=end)
+	{	
+		mid=start+(end-start)/2;				//防溢出
+		printf("in loop\n");
+		if(t[mid]<key)
+		{
+			start=mid+1;
+		}
+		else if(t[mid]>key)
+		{
+			end=mid-1;
+		}
+		else
+		{
+			ret=mid;
+			break;
+		}
+	}
+	return ret;  
+ }
